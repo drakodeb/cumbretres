@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Cumbre Serena | Inmobiliaria - Elige tu estilo</title>
-    <!-- Fuentes e íconos -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>Cumbre Serena | Lotes frente al mar</title>
+    <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,493 +16,443 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #fafaf8;
-            color: #1e2a2f;
-            scroll-behavior: smooth;
-            line-height: 1.5;
+            font-family: 'Quicksand', sans-serif;
+            background: #fefef7;
+            color: #1e2f2c;
+            line-height: 1.4;
         }
 
-        /* Contenedor principal */
+        /* contenedor suave */
         .container {
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 0 20px;
         }
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #e2e6e9;
-            padding-bottom: 1.5rem;
+        /* header / navegación sencilla */
+        .top-bar {
+            background: #ffffffdd;
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border-bottom: 1px solid #cfe3db;
         }
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #2c5f4a, #5b8c6f);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-        .logo i {
-            background: none;
-            color: #3b7a5c;
-            margin-right: 6px;
-        }
-        .tagline {
-            color: #5a6e64;
-            font-weight: 400;
-            margin-top: 8px;
-            font-size: 1rem;
-        }
-        .sub {
-            font-size: 0.9rem;
-            background: #eef3ef;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 40px;
-            margin-top: 12px;
-            color: #2c5f4a;
-        }
-
-        /* Tarjetas de selección de estilo */
-        .selector-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.8rem;
-            justify-content: center;
-            margin: 2rem 0 3rem;
-        }
-        .style-card {
-            background: white;
-            border-radius: 2rem;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
-            flex: 1;
-            min-width: 260px;
-            max-width: 320px;
-            padding: 1.8rem 1.2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            border: 2px solid transparent;
-        }
-        .style-card.selected {
-            border-color: #3b7a5c;
-            background: #ffffff;
-            box-shadow: 0 20px 35px -12px rgba(44,95,74,0.2);
-            transform: scale(1.02);
-        }
-        .style-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
-        }
-        .card-icon {
-            font-size: 2.5rem;
-            color: #3b7a5c;
-            margin-bottom: 1rem;
-        }
-        .style-card h3 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        .style-card p {
-            font-size: 0.9rem;
-            color: #4f6b5e;
-            margin-bottom: 1.2rem;
-        }
-        .badge-style {
-            background: #ecf7f0;
-            padding: 5px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #2c5f4a;
-            display: inline-block;
-        }
-        .btn-select {
-            margin-top: 1rem;
-            background: none;
-            border: 1px solid #cbdcd2;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: 0.8rem;
-            transition: all 0.2s;
-            cursor: pointer;
-            background-color: #f9fbf9;
-        }
-        .style-card.selected .btn-select {
-            background: #3b7a5c;
-            border-color: #3b7a5c;
-            color: white;
-        }
-
-        /* SECCIÓN DINÁMICA: vista previa del sitio según opción elegida */
-        .site-preview {
-            background: #ffffff;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            border: 1px solid #eef2ef;
-        }
-        .preview-header {
-            background: #fefcf5;
-            padding: 1.2rem 2rem;
-            border-bottom: 1px solid #e9ece5;
+        .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
+            padding: 1rem 0;
             flex-wrap: wrap;
         }
-        .preview-header h2 {
-            font-size: 1.5rem;
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #1b6b53;
+        }
+        .logo i {
+            color: #3c9c7c;
+            margin-right: 6px;
+        }
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
             font-weight: 600;
-            color: #2d3e35;
+            color: #2c5a4a;
+            transition: 0.2s;
         }
-        .preview-header span {
-            font-size: 0.8rem;
-            background: #eef2ea;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-weight: 500;
+        .nav-links a:hover {
+            color: #0f8b6b;
+            border-bottom: 2px solid #3c9c7c;
         }
-        .gallery {
+
+        /* hero */
+        .hero {
+            background: linear-gradient(120deg, #cbe9e0 0%, #e0f2ea 100%);
+            border-radius: 0 0 3rem 3rem;
+            margin-bottom: 2rem;
+            padding: 3rem 0;
+        }
+        .hero-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #155a48;
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+        }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #2b5c4a;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            background: #206e55;
+            color: white;
+            padding: 0.8rem 1.6rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #206e55;
+            color: #206e55;
+            margin-left: 0.8rem;
+        }
+        .btn:hover {
+            background: #0e5a43;
+            transform: translateY(-2px);
+        }
+        .hero-img {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-img img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 2rem;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        /* sección de lotes destacados */
+        .section-title {
+            text-align: center;
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: #155a48;
+        }
+        .section-sub {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #487a68;
+        }
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
         }
-        .gallery-card {
-            border-radius: 1.2rem;
+        .lote-card {
+            background: white;
+            border-radius: 1.5rem;
             overflow: hidden;
-            background: #fbfdf9;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.2s;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            transition: all 0.25s;
+            border: 1px solid #e0ede6;
         }
-        .gallery-card:hover {
-            transform: translateY(-4px);
+        .lote-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 32px -12px rgba(28, 85, 66, 0.2);
         }
-        .gallery-card img {
+        .lote-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            display: block;
-            transition: 0.2s;
         }
-        .img-caption {
-            padding: 0.8rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #2d4e3f;
-            background: white;
-            border-top: 1px solid #ecf2ea;
+        .card-info {
+            padding: 1.2rem;
         }
-        .lema {
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: #fafaf5;
-            font-size: 1.2rem;
-            font-style: italic;
-            border-top: 1px solid #e6ede6;
-            color: #325a48;
-            font-weight: 500;
+        .card-info h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
         }
-        .contact-sim {
-            background: #f4f8f2;
-            margin: 1rem 2rem 2rem 2rem;
-            border-radius: 1.5rem;
-            padding: 1rem;
-            text-align: center;
+        .location {
+            color: #5d8b78;
             font-size: 0.85rem;
-            color: #355c49;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1c6b51;
+            margin: 0.5rem 0;
+        }
+        .detail {
+            font-size: 0.85rem;
+            display: flex;
+            gap: 1rem;
+            margin: 0.5rem 0;
+            color: #466b5c;
+        }
+        .btn-small {
+            background: #eef6f2;
+            color: #206e55;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.7rem;
+            text-decoration: none;
+            transition: 0.2s;
+            border: 1px solid #cde2d8;
+        }
+        .btn-small:hover {
+            background: #206e55;
+            color: white;
+        }
+
+        /* galería de inspiración (mar) */
+        .gallery-inspo {
+            background: #eef5f0;
+            border-radius: 2rem;
+            padding: 2rem 1rem;
+            margin: 2.5rem 0;
+        }
+        .gallery-flex {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gallery-flex img {
+            width: 220px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 1.2rem;
+            transition: 0.2s;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        .gallery-flex img:hover {
+            transform: scale(1.02);
+        }
+
+        /* contacto rápido */
+        .contact-banner {
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #cee0d8;
+        }
+        .contact-banner h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .contact-banner .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            font-weight: 500;
         }
         footer {
             text-align: center;
-            margin-top: 2.5rem;
-            padding: 1rem;
+            padding: 1.8rem 0;
+            border-top: 1px solid #dae9e2;
             font-size: 0.75rem;
-            color: #7b8e82;
-            border-top: 1px solid #e0e8e0;
+            color: #618c79;
         }
-        button {
-            background: none;
-            border: none;
+        .design-credit {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            color: #7ba692;
+            font-weight: 500;
         }
         @media (max-width: 700px) {
-            .container { padding: 1rem; }
-            .gallery { padding: 1rem; gap: 1rem; }
-            .preview-header { flex-direction: column; gap: 8px; }
+            .hero-text h1 { font-size: 1.8rem; }
+            .navbar { flex-direction: column; gap: 0.7rem; }
+            .nav-links a { margin: 0 0.8rem; }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <div class="logo">
-            <i class="fas fa-mountain"></i> Cumbre Serena
-        </div>
-        <div class="tagline">Inmobiliaria de altura · Espacios que inspiran calma</div>
-        <div class="sub"><i class="fas fa-images"></i> Elige la esencia de tu sitio · galerías con imágenes libres</div>
-    </header>
-
-    <!-- Tres opciones principales de estilo -->
-    <div class="selector-grid" id="selectorGrid">
-        <!-- Opción 1: Vistas al horizonte / lujo sereno -->
-        <div class="style-card" data-option="horizonte" id="cardHorizonte">
-            <div class="card-icon"><i class="fas fa-mountain-sun"></i></div>
-            <h3>Vistas al Horizonte</h3>
-            <p>Estilo aspiracional · lujo sereno<br>Propiedades con paisajes amplios</p>
-            <div class="badge-style">✨ Panorámicas · Moderno</div>
-            <div class="btn-select">Seleccionar estilo</div>
-        </div>
-        <!-- Opción 2: Bosque tranquilo / ecológico -->
-        <div class="style-card" data-option="bosque" id="cardBosque">
-            <div class="card-icon"><i class="fas fa-tree"></i></div>
-            <h3>Bosque Tranquilo</h3>
-            <p>Naturaleza · sustentable · cabañas<br>Rodeado de árboles y calma</p>
-            <div class="badge-style">🌲 Ecológico · Familiar</div>
-            <div class="btn-select">Seleccionar estilo</div>
-        </div>
-        <!-- Opción 3: Cumbre urbana / loft contemporáneo -->
-        <div class="style-card" data-option="urbana" id="cardUrbana">
-            <div class="card-icon"><i class="fas fa-city"></i></div>
-            <h3>Cumbre Urbana</h3>
-            <p>Vistas metropolitanas · diseño clean<br>Penthouse y áticos modernos</p>
-            <div class="badge-style">🏙️ Urbano · Exclusivo</div>
-            <div class="btn-select">Seleccionar estilo</div>
+<div class="top-bar">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo"><i class="fas fa-mountain"></i> Cumbre Serena · Lotes costeros</div>
+            <div class="nav-links">
+                <a href="#">Inicio</a>
+                <a href="#lotes">Lotes</a>
+                <a href="#galeria">Galería</a>
+                <a href="#contacto">Contacto</a>
+            </div>
         </div>
     </div>
-
-    <!-- ZONA DE PREVIEW DINÁMICO: se actualizará según opción elegida -->
-    <div class="site-preview" id="dynamicPreview">
-        <!-- Contenido por defecto (se llenará con JS) -->
-        <div class="preview-header">
-            <h2 id="previewTitle">🌄 Vistas al Horizonte</h2>
-            <span id="previewBadge">Estilo seleccionado</span>
-        </div>
-        <div class="gallery" id="galleryContainer">
-            <!-- imágenes se cargarán dinámicamente -->
-        </div>
-        <div class="lema" id="lemaText">"Donde la altura encuentra tu hogar"</div>
-        <div class="contact-sim">
-            <i class="fas fa-phone-alt"></i> +52 55 1234 5678 &nbsp;|&nbsp;
-            <i class="fas fa-envelope"></i> contacto@cumbreserena.mx &nbsp;|&nbsp;
-            <i class="fas fa-map-marker-alt"></i> Zona Residencial Serenidad
-        </div>
-    </div>
-    <footer>
-        <i class="fas fa-camera"></i> Imágenes gratuitas vía Unsplash · Galerías demostrativas para Cumbre Serena<br>
-        Selecciona una opción arriba para definir la identidad visual de tu inmobiliaria.
-    </footer>
 </div>
 
+<!-- Hero principal con imagen de mar free -->
+<div class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Tu pedazo de paraíso frente al mar</h1>
+                <p>Lotes con vista al océano, inversión segura y estilo de vida único.<br>Descubre la serenidad de despertar con el sonido de las olas.</p>
+                <a href="#lotes" class="btn"><i class="fas fa-map-pin"></i> Ver lotes disponibles</a>
+                <a href="#contacto" class="btn btn-outline"><i class="fas fa-headset"></i> Asesoría gratuita</a>
+            </div>
+            <div class="hero-img">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=400&fit=crop" alt="Playa paradisíaca">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="lotes">
+    <div class="section-title">🌊 Lotes en venta · Primera línea</div>
+    <div class="section-sub">Precios directos sin comisiones ocultas, financiamiento disponible</div>
+
+    <div class="cards-grid">
+        <!-- Lote 1 -->
+        <div class="lote-card">
+            <img src="https://images.unsplash.com/photo-1493246507139-91e8fadf2c1a?w=600&h=400&fit=crop" alt="Vista aérea lote costero">
+            <div class="card-info">
+                <h3>Lote Brisas del Mar</h3>
+                <div class="location"><i class="fas fa-map-marker-alt"></i> Playa Escondida, Zona Dorada</div>
+                <div class="price">$89,000 USD</div>
+                <div class="detail"><span><i class="fas fa-vector-square"></i> 450 m²</span> <span><i class="fas fa-swimmer"></i> A 80 m de la playa</span></div>
+                <a href="#" class="btn-small">Solicitar información <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Lote 2 -->
+        <div class="lote-card">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop" alt="Terreno con vista oceánica">
+            <div class="card-info">
+                <h3>Terreno Miramar</h3>
+                <div class="location"><i class="fas fa-map-marker-alt"></i> Punta Coral, Riviera</div>
+                <div class="price">$124,500 USD</div>
+                <div class="detail"><span><i class="fas fa-vector-square"></i> 620 m²</span> <span><i class="fas fa-sun"></i> Vista 180° al mar</span></div>
+                <a href="#" class="btn-small">Ver detalles <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <!-- Lote 3 -->
+        <div class="lote-card">
+            <img src="https://images.unsplash.com/photo-1502951682449-e6c3f90c6b87?w=600&h=400&fit=crop" alt="Lote con vegetación costera">
+            <div class="card-info">
+                <h3>Lote Palmeras Blancas</h3>
+                <div class="location"><i class="fas fa-map-marker-alt"></i> Puerto Azul, sector norte</div>
+                <div class="price">$72,900 USD</div>
+                <div class="detail"><span><i class="fas fa-vector-square"></i> 380 m²</span> <span><i class="fas fa-tree"></i> Área verde exclusiva</span></div>
+                <a href="#" class="btn-small">Apartar ahora <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Galería de inspiración (imágenes free del mar / lotes) -->
+<div class="container" id="galeria">
+    <div class="gallery-inspo">
+        <div class="section-title" style="margin-top:0;">🏝️ Vive cerca del mar · inspiración real</div>
+        <div class="gallery-flex">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&h=180&fit=crop" alt="atardecer playa">
+            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=300&h=180&fit=crop" alt="mar turquesa">
+            <img src="https://images.unsplash.com/photo-1506953829328-26acec5d25f0?w=300&h=180&fit=crop" alt="costa rocosa">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=300&h=180&fit=crop" alt="vista aérea costa">
+        </div>
+        <div class="section-sub" style="margin-top: 1rem;">Imágenes libres · el estilo de vida que te mereces</div>
+    </div>
+</div>
+
+<!-- Sección de beneficios rápidos -->
+<div class="container">
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin: 1rem 0;">
+        <div style="background: white; border-radius: 2rem; padding: 1.2rem 1.5rem; text-align: center; width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+            <i class="fas fa-hands-helping" style="font-size: 2rem; color: #1b6b53;"></i>
+            <h4>Asesoría legal</h4>
+            <p style="font-size: 0.75rem;">Escrituración directa</p>
+        </div>
+        <div style="background: white; border-radius: 2rem; padding: 1.2rem 1.5rem; text-align: center; width: 200px;">
+            <i class="fas fa-chart-line" style="font-size: 2rem; color: #1b6b53;"></i>
+            <h4>Plusvalía garantizada</h4>
+            <p style="font-size: 0.75rem;">Zona en crecimiento</p>
+        </div>
+        <div style="background: white; border-radius: 2rem; padding: 1.2rem 1.5rem; text-align: center; width: 200px;">
+            <i class="fas fa-car" style="font-size: 2rem; color: #1b6b53;"></i>
+            <h4>Acceso 24/7</h4>
+            <p style="font-size: 0.75rem;">Vialidades pavimentadas</p>
+        </div>
+    </div>
+</div>
+
+<!-- Contacto rápido -->
+<div class="container" id="contacto">
+    <div class="contact-banner">
+        <h3><i class="fas fa-phone-alt"></i> ¿Quieres tener tu lote frente al mar?</h3>
+        <p>Déjanos tus datos y un asesor especializado te contactará en menos de 24h.</p>
+        <form id="contactForm" style="max-width: 500px; margin: 1rem auto 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+            <input type="text" placeholder="Tu nombre" style="flex:1; min-width: 160px; padding: 12px; border-radius: 50px; border: 1px solid #cce0d8; font-family: inherit;" required id="nombreInput">
+            <input type="email" placeholder="Correo electrónico" style="flex:1; min-width: 180px; padding: 12px; border-radius: 50px; border: 1px solid #cce0d8;" required id="emailInput">
+            <button type="submit" class="btn" style="padding: 12px 24px; background: #1b6b53;"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </form>
+        <div class="contact-info">
+            <span><i class="fab fa-whatsapp"></i> +52 984 123 4567</span>
+            <span><i class="fas fa-envelope"></i> contacto@cumbreserena.mx</span>
+            <span><i class="fas fa-map"></i> Carretera Costera km 12, Riviera Maya</span>
+        </div>
+        <div id="formMessage" style="margin-top: 0.8rem; font-size: 0.8rem; color: #206e55;"></div>
+    </div>
+</div>
+
+<footer>
+    <i class="fas fa-camera"></i> Imágenes gratuitas cortesía de Unsplash · Inmobiliaria Cumbre Serena · Todos los lotes cuentan con estudio de título.<br>
+    🌊 Tu sueño frente al mar comienza aquí.
+    <div class="design-credit">by design@drako2026</div>
+</footer>
+
 <script>
-    // ---------- DATOS DE GALERÍAS e info para cada opción (imágenes free de Unsplash) ----------
-    const optionsData = {
-        horizonte: {
-            titulo: "🌄 Vistas al Horizonte",
-            badge: "Lujo Sereno · Inspiración abierta",
-            lema: "✨ “Donde la altura encuentra tu hogar” — vistas que elevan el espíritu",
-            galeria: [
-                {
-                    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop",
-                    alt: "Amanecer en montañas",
-                    caption: "Amanecer sereno en la cumbre"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=400&fit=crop",
-                    alt: "Terraza moderna con vista",
-                    caption: "Terraza panorámica · diseño contemporáneo"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&h=400&fit=crop",
-                    alt: "Piscina infinita",
-                    caption: "Piscina infinita con horizonte de montaña"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1617098900591-3d90928a4f47?w=600&h=400&fit=crop",
-                    alt: "Dormitorio con ventanal",
-                    caption: "Habitación principal · luz y naturaleza"
-                }
-            ]
-        },
-        bosque: {
-            titulo: "🌲 Bosque Tranquilo",
-            badge: "Eco · Santuario natural",
-            lema: "🍃 “Vive en armonía con el bosque” — autenticidad y calma eterna",
-            galeria: [
-                {
-                    url: "https://images.unsplash.com/photo-1441974231531-c622288db9a6?w=600&h=400&fit=crop",
-                    alt: "Sendero en el bosque",
-                    caption: "Sendero rodeado de árboles milenarios"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop",
-                    alt: "Cabaña de madera",
-                    caption: "Fachada rústica · estilo refugio"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1542718610-a1d656d1884b?w=600&h=400&fit=crop",
-                    alt: "Interior acogedor",
-                    caption: "Sala con chimenea y vista al jardín"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600&h=400&fit=crop",
-                    alt: "Terraza bosque",
-                    caption: "Terraza con hamacas y aire puro"
-                }
-            ]
-        },
-        urbana: {
-            titulo: "🏙️ Cumbre Urbana",
-            badge: "Loft contemporáneo · estilo metropolitano",
-            lema: "🌟 “Elegancia en las alturas” — vibrante y sofisticado",
-            galeria: [
-                {
-                    url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&h=400&fit=crop",
-                    alt: "Vista a la ciudad",
-                    caption: "Skyline desde el penthouse"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=400&fit=crop",
-                    alt: "Sala moderna",
-                    caption: "Salón con acabados minimalistas"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1560185009-dddeb820c1be?w=600&h=400&fit=crop",
-                    alt: "Cocina abierta",
-                    caption: "Cocina premium · diseño clean"
-                },
-                {
-                    url: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=600&h=400&fit=crop",
-                    alt: "Terraza urbana",
-                    caption: "Terraza con lounge y luces LED"
-                }
-            ]
-        }
-    };
-
-    // Estado actual
-    let currentOption = "horizonte";   // por defecto vista horizonte
-
-    // Función para actualizar toda la preview dinámica según la opción
-    function updatePreview(optionKey) {
-        const data = optionsData[optionKey];
-        if (!data) return;
-
-        // Actualizar textos del header y lema
-        document.getElementById("previewTitle").innerHTML = data.titulo;
-        document.getElementById("previewBadge").innerText = data.badge;
-        document.getElementById("lemaText").innerHTML = data.lema;
-
-        // Renderizar galería
-        const galleryContainer = document.getElementById("galleryContainer");
-        if (!galleryContainer) return;
-        
-        // Limpiar y generar las cards de imagen
-        galleryContainer.innerHTML = "";
-        data.galeria.forEach(img => {
-            const card = document.createElement("div");
-            card.className = "gallery-card";
-            // imagen con lazy opcional
-            const imgElement = document.createElement("img");
-            imgElement.src = img.url;
-            imgElement.alt = img.alt;
-            imgElement.loading = "lazy";
-            // fallback visual (en caso de error imagen, no se rompe)
-            imgElement.onerror = function() { this.src = "https://placehold.co/600x400/e2f0e6/2c5f4a?text=Cumbre+Serena"; };
-            
-            const captionDiv = document.createElement("div");
-            captionDiv.className = "img-caption";
-            captionDiv.innerHTML = `<i class="fas fa-image"></i> ${img.caption}`;
-            
-            card.appendChild(imgElement);
-            card.appendChild(captionDiv);
-            galleryContainer.appendChild(card);
+    // pequeña interacción para el formulario de contacto (demo)
+    const form = document.getElementById('contactForm');
+    const messageDiv = document.getElementById('formMessage');
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreInput')?.value.trim() || '';
+            const email = document.getElementById('emailInput')?.value.trim() || '';
+            if(nombre === '' || email === '') {
+                messageDiv.innerHTML = '⚠️ Por favor completa tu nombre y correo.';
+                messageDiv.style.color = '#b1624b';
+                setTimeout(() => { messageDiv.innerHTML = ''; }, 2500);
+                return;
+            }
+            messageDiv.innerHTML = `✅ ¡Gracias ${nombre}! Un asesor te contactará a ${email} en breve. 🌊`;
+            messageDiv.style.color = '#1b6b53';
+            form.reset();
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 4000);
         });
     }
 
-    // Resaltar tarjeta seleccionada y cambiar estilo visual
-    function setSelectedCard(optionKey) {
-        // quitar clase selected de todas
-        const cards = document.querySelectorAll(".style-card");
-        cards.forEach(card => card.classList.remove("selected"));
-        
-        // agregar clase a la tarjeta correspondiente
-        let targetCard = null;
-        if (optionKey === "horizonte") targetCard = document.getElementById("cardHorizonte");
-        else if (optionKey === "bosque") targetCard = document.getElementById("cardBosque");
-        else if (optionKey === "urbana") targetCard = document.getElementById("cardUrbana");
-        
-        if (targetCard) targetCard.classList.add("selected");
-    }
-
-    // Cambiar opción global y actualizar preview + UI
-    function changeOption(optionKey) {
-        if (optionKey === currentOption) return;
-        currentOption = optionKey;
-        updatePreview(optionKey);
-        setSelectedCard(optionKey);
-        // Guardar en localStorage para mantener selección al recargar (opcional)
-        localStorage.setItem("cumbreSerenaStyle", optionKey);
-    }
-
-    // Eventos en las tarjetas y botones (toda la tarjeta es clickeable)
-    function bindEvents() {
-        const cardHorizonte = document.getElementById("cardHorizonte");
-        const cardBosque = document.getElementById("cardBosque");
-        const cardUrbana = document.getElementById("cardUrbana");
-        
-        if (cardHorizonte) {
-            cardHorizonte.addEventListener("click", (e) => {
-                // evitar que si se da clic en el botón interno se duplique, pero está bien
-                e.stopPropagation();
-                changeOption("horizonte");
-            });
-            // botón interno también
-            const btnHor = cardHorizonte.querySelector(".btn-select");
-            if(btnHor) btnHor.addEventListener("click", (e) => { e.stopPropagation(); changeOption("horizonte"); });
-        }
-        
-        if (cardBosque) {
-            cardBosque.addEventListener("click", (e) => { e.stopPropagation(); changeOption("bosque"); });
-            const btnBos = cardBosque.querySelector(".btn-select");
-            if(btnBos) btnBos.addEventListener("click", (e) => { e.stopPropagation(); changeOption("bosque"); });
-        }
-        
-        if (cardUrbana) {
-            cardUrbana.addEventListener("click", (e) => { e.stopPropagation(); changeOption("urbana"); });
-            const btnUrb = cardUrbana.querySelector(".btn-select");
-            if(btnUrb) btnUrb.addEventListener("click", (e) => { e.stopPropagation(); changeOption("urbana"); });
-        }
-    }
-    
-    // Inicializar: revisar si hay selección guardada o aplicar por defecto horizonte
-    function init() {
-        // cargar opción desde localStorage si existe
-        const saved = localStorage.getItem("cumbreSerenaStyle");
-        let startOption = "horizonte";
-        if (saved && (saved === "horizonte" || saved === "bosque" || saved === "urbana")) {
-            startOption = saved;
-        }
-        currentOption = startOption;
-        updatePreview(currentOption);
-        setSelectedCard(currentOption);
-        bindEvents();
-    }
-
-    // Ejecutar cuando DOM esté listo
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", init);
-    } else {
-        init();
-    }
+    // smooth scroll para enlaces internos (sencillo)
+    document.querySelectorAll('.nav-links a, .btn[href^="#"], .btn-outline[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const hash = this.getAttribute('href');
+            if(hash && hash.startsWith('#') && hash !== '#') {
+                const targetId = hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if(targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>

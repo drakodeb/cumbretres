@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Cumbre Serena | Inmobiliaria - Elige tu estilo</title>
+    <!-- Fuentes e íconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fafaf8;
+            color: #1e2a2f;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e6e9;
+            padding-bottom: 1.5rem;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #2c5f4a, #5b8c6f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        .logo i {
+            background: none;
+            color: #3b7a5c;
+            margin-right: 6px;
+        }
+        .tagline {
+            color: #5a6e64;
+            font-weight: 400;
+            margin-top: 8px;
+            font-size: 1rem;
+        }
+        .sub {
+            font-size: 0.9rem;
+            background: #eef3ef;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin-top: 12px;
+            color: #2c5f4a;
+        }
+
+        /* Tarjetas de selección de estilo */
+        .selector-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin: 2rem 0 3rem;
+        }
+        .style-card {
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
+        }
+        .style-card.selected {
+            border-color: #3b7a5c;
+            background: #ffffff;
+            box-shadow: 0 20px 35px -12px rgba(44,95,74,0.2);
+            transform: scale(1.02);
+        }
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            color: #3b7a5c;
+            margin-bottom: 1rem;
+        }
+        .style-card h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .style-card p {
+            font-size: 0.9rem;
+            color: #4f6b5e;
+            margin-bottom: 1.2rem;
+        }
+        .badge-style {
+            background: #ecf7f0;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #2c5f4a;
+            display: inline-block;
+        }
+        .btn-select {
+            margin-top: 1rem;
+            background: none;
+            border: 1px solid #cbdcd2;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            background-color: #f9fbf9;
+        }
+        .style-card.selected .btn-select {
+            background: #3b7a5c;
+            border-color: #3b7a5c;
+            color: white;
+        }
+
+        /* SECCIÓN DINÁMICA: vista previa del sitio según opción elegida */
+        .site-preview {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid #eef2ef;
+        }
+        .preview-header {
+            background: #fefcf5;
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #e9ece5;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .preview-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3e35;
+        }
+        .preview-header span {
+            font-size: 0.8rem;
+            background: #eef2ea;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+        .gallery-card {
+            border-radius: 1.2rem;
+            overflow: hidden;
+            background: #fbfdf9;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: transform 0.2s;
+        }
+        .gallery-card:hover {
+            transform: translateY(-4px);
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: 0.2s;
+        }
+        .img-caption {
+            padding: 0.8rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #2d4e3f;
+            background: white;
+            border-top: 1px solid #ecf2ea;
+        }
+        .lema {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #fafaf5;
+            font-size: 1.2rem;
+            font-style: italic;
+            border-top: 1px solid #e6ede6;
+            color: #325a48;
+            font-weight: 500;
+        }
+        .contact-sim {
+            background: #f4f8f2;
+            margin: 1rem 2rem 2rem 2rem;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #355c49;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: #7b8e82;
+            border-top: 1px solid #e0e8e0;
+        }
+        button {
+            background: none;
+            border: none;
+        }
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .gallery { padding: 1rem; gap: 1rem; }
+            .preview-header { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">
+            <i class="fas fa-mountain"></i> Cumbre Serena
+        </div>
+        <div class="tagline">Inmobiliaria de altura · Espacios que inspiran calma</div>
+        <div class="sub"><i class="fas fa-images"></i> Elige la esencia de tu sitio · galerías con imágenes libres</div>
+    </header>
+
+    <!-- Tres opciones principales de estilo -->
+    <div class="selector-grid" id="selectorGrid">
+        <!-- Opción 1: Vistas al horizonte / lujo sereno -->
+        <div class="style-card" data-option="horizonte" id="cardHorizonte">
+            <div class="card-icon"><i class="fas fa-mountain-sun"></i></div>
+            <h3>Vistas al Horizonte</h3>
+            <p>Estilo aspiracional · lujo sereno<br>Propiedades con paisajes amplios</p>
+            <div class="badge-style">✨ Panorámicas · Moderno</div>
+            <div class="btn-select">Seleccionar estilo</div>
+        </div>
+        <!-- Opción 2: Bosque tranquilo / ecológico -->
+        <div class="style-card" data-option="bosque" id="cardBosque">
+            <div class="card-icon"><i class="fas fa-tree"></i></div>
+            <h3>Bosque Tranquilo</h3>
+            <p>Naturaleza · sustentable · cabañas<br>Rodeado de árboles y calma</p>
+            <div class="badge-style">🌲 Ecológico · Familiar</div>
+            <div class="btn-select">Seleccionar estilo</div>
+        </div>
+        <!-- Opción 3: Cumbre urbana / loft contemporáneo -->
+        <div class="style-card" data-option="urbana" id="cardUrbana">
+            <div class="card-icon"><i class="fas fa-city"></i></div>
+            <h3>Cumbre Urbana</h3>
+            <p>Vistas metropolitanas · diseño clean<br>Penthouse y áticos modernos</p>
+            <div class="badge-style">🏙️ Urbano · Exclusivo</div>
+            <div class="btn-select">Seleccionar estilo</div>
+        </div>
+    </div>
+
+    <!-- ZONA DE PREVIEW DINÁMICO: se actualizará según opción elegida -->
+    <div class="site-preview" id="dynamicPreview">
+        <!-- Contenido por defecto (se llenará con JS) -->
+        <div class="preview-header">
+            <h2 id="previewTitle">🌄 Vistas al Horizonte</h2>
+            <span id="previewBadge">Estilo seleccionado</span>
+        </div>
+        <div class="gallery" id="galleryContainer">
+            <!-- imágenes se cargarán dinámicamente -->
+        </div>
+        <div class="lema" id="lemaText">"Donde la altura encuentra tu hogar"</div>
+        <div class="contact-sim">
+            <i class="fas fa-phone-alt"></i> +52 55 1234 5678 &nbsp;|&nbsp;
+            <i class="fas fa-envelope"></i> contacto@cumbreserena.mx &nbsp;|&nbsp;
+            <i class="fas fa-map-marker-alt"></i> Zona Residencial Serenidad
+        </div>
+    </div>
+    <footer>
+        <i class="fas fa-camera"></i> Imágenes gratuitas vía Unsplash · Galerías demostrativas para Cumbre Serena<br>
+        Selecciona una opción arriba para definir la identidad visual de tu inmobiliaria.
+    </footer>
+</div>
+
+<script>
+    // ---------- DATOS DE GALERÍAS e info para cada opción (imágenes free de Unsplash) ----------
+    const optionsData = {
+        horizonte: {
+            titulo: "🌄 Vistas al Horizonte",
+            badge: "Lujo Sereno · Inspiración abierta",
+            lema: "✨ “Donde la altura encuentra tu hogar” — vistas que elevan el espíritu",
+            galeria: [
+                {
+                    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop",
+                    alt: "Amanecer en montañas",
+                    caption: "Amanecer sereno en la cumbre"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&h=400&fit=crop",
+                    alt: "Terraza moderna con vista",
+                    caption: "Terraza panorámica · diseño contemporáneo"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&h=400&fit=crop",
+                    alt: "Piscina infinita",
+                    caption: "Piscina infinita con horizonte de montaña"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1617098900591-3d90928a4f47?w=600&h=400&fit=crop",
+                    alt: "Dormitorio con ventanal",
+                    caption: "Habitación principal · luz y naturaleza"
+                }
+            ]
+        },
+        bosque: {
+            titulo: "🌲 Bosque Tranquilo",
+            badge: "Eco · Santuario natural",
+            lema: "🍃 “Vive en armonía con el bosque” — autenticidad y calma eterna",
+            galeria: [
+                {
+                    url: "https://images.unsplash.com/photo-1441974231531-c622288db9a6?w=600&h=400&fit=crop",
+                    alt: "Sendero en el bosque",
+                    caption: "Sendero rodeado de árboles milenarios"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop",
+                    alt: "Cabaña de madera",
+                    caption: "Fachada rústica · estilo refugio"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1542718610-a1d656d1884b?w=600&h=400&fit=crop",
+                    alt: "Interior acogedor",
+                    caption: "Sala con chimenea y vista al jardín"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600&h=400&fit=crop",
+                    alt: "Terraza bosque",
+                    caption: "Terraza con hamacas y aire puro"
+                }
+            ]
+        },
+        urbana: {
+            titulo: "🏙️ Cumbre Urbana",
+            badge: "Loft contemporáneo · estilo metropolitano",
+            lema: "🌟 “Elegancia en las alturas” — vibrante y sofisticado",
+            galeria: [
+                {
+                    url: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&h=400&fit=crop",
+                    alt: "Vista a la ciudad",
+                    caption: "Skyline desde el penthouse"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=400&fit=crop",
+                    alt: "Sala moderna",
+                    caption: "Salón con acabados minimalistas"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1560185009-dddeb820c1be?w=600&h=400&fit=crop",
+                    alt: "Cocina abierta",
+                    caption: "Cocina premium · diseño clean"
+                },
+                {
+                    url: "https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=600&h=400&fit=crop",
+                    alt: "Terraza urbana",
+                    caption: "Terraza con lounge y luces LED"
+                }
+            ]
+        }
+    };
+
+    // Estado actual
+    let currentOption = "horizonte";   // por defecto vista horizonte
+
+    // Función para actualizar toda la preview dinámica según la opción
+    function updatePreview(optionKey) {
+        const data = optionsData[optionKey];
+        if (!data) return;
+
+        // Actualizar textos del header y lema
+        document.getElementById("previewTitle").innerHTML = data.titulo;
+        document.getElementById("previewBadge").innerText = data.badge;
+        document.getElementById("lemaText").innerHTML = data.lema;
+
+        // Renderizar galería
+        const galleryContainer = document.getElementById("galleryContainer");
+        if (!galleryContainer) return;
+        
+        // Limpiar y generar las cards de imagen
+        galleryContainer.innerHTML = "";
+        data.galeria.forEach(img => {
+            const card = document.createElement("div");
+            card.className = "gallery-card";
+            // imagen con lazy opcional
+            const imgElement = document.createElement("img");
+            imgElement.src = img.url;
+            imgElement.alt = img.alt;
+            imgElement.loading = "lazy";
+            // fallback visual (en caso de error imagen, no se rompe)
+            imgElement.onerror = function() { this.src = "https://placehold.co/600x400/e2f0e6/2c5f4a?text=Cumbre+Serena"; };
+            
+            const captionDiv = document.createElement("div");
+            captionDiv.className = "img-caption";
+            captionDiv.innerHTML = `<i class="fas fa-image"></i> ${img.caption}`;
+            
+            card.appendChild(imgElement);
+            card.appendChild(captionDiv);
+            galleryContainer.appendChild(card);
+        });
+    }
+
+    // Resaltar tarjeta seleccionada y cambiar estilo visual
+    function setSelectedCard(optionKey) {
+        // quitar clase selected de todas
+        const cards = document.querySelectorAll(".style-card");
+        cards.forEach(card => card.classList.remove("selected"));
+        
+        // agregar clase a la tarjeta correspondiente
+        let targetCard = null;
+        if (optionKey === "horizonte") targetCard = document.getElementById("cardHorizonte");
+        else if (optionKey === "bosque") targetCard = document.getElementById("cardBosque");
+        else if (optionKey === "urbana") targetCard = document.getElementById("cardUrbana");
+        
+        if (targetCard) targetCard.classList.add("selected");
+    }
+
+    // Cambiar opción global y actualizar preview + UI
+    function changeOption(optionKey) {
+        if (optionKey === currentOption) return;
+        currentOption = optionKey;
+        updatePreview(optionKey);
+        setSelectedCard(optionKey);
+        // Guardar en localStorage para mantener selección al recargar (opcional)
+        localStorage.setItem("cumbreSerenaStyle", optionKey);
+    }
+
+    // Eventos en las tarjetas y botones (toda la tarjeta es clickeable)
+    function bindEvents() {
+        const cardHorizonte = document.getElementById("cardHorizonte");
+        const cardBosque = document.getElementById("cardBosque");
+        const cardUrbana = document.getElementById("cardUrbana");
+        
+        if (cardHorizonte) {
+            cardHorizonte.addEventListener("click", (e) => {
+                // evitar que si se da clic en el botón interno se duplique, pero está bien
+                e.stopPropagation();
+                changeOption("horizonte");
+            });
+            // botón interno también
+            const btnHor = cardHorizonte.querySelector(".btn-select");
+            if(btnHor) btnHor.addEventListener("click", (e) => { e.stopPropagation(); changeOption("horizonte"); });
+        }
+        
+        if (cardBosque) {
+            cardBosque.addEventListener("click", (e) => { e.stopPropagation(); changeOption("bosque"); });
+            const btnBos = cardBosque.querySelector(".btn-select");
+            if(btnBos) btnBos.addEventListener("click", (e) => { e.stopPropagation(); changeOption("bosque"); });
+        }
+        
+        if (cardUrbana) {
+            cardUrbana.addEventListener("click", (e) => { e.stopPropagation(); changeOption("urbana"); });
+            const btnUrb = cardUrbana.querySelector(".btn-select");
+            if(btnUrb) btnUrb.addEventListener("click", (e) => { e.stopPropagation(); changeOption("urbana"); });
+        }
+    }
+    
+    // Inicializar: revisar si hay selección guardada o aplicar por defecto horizonte
+    function init() {
+        // cargar opción desde localStorage si existe
+        const saved = localStorage.getItem("cumbreSerenaStyle");
+        let startOption = "horizonte";
+        if (saved && (saved === "horizonte" || saved === "bosque" || saved === "urbana")) {
+            startOption = saved;
+        }
+        currentOption = startOption;
+        updatePreview(currentOption);
+        setSelectedCard(currentOption);
+        bindEvents();
+    }
+
+    // Ejecutar cuando DOM esté listo
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+</script>
+</body>
+</html>
